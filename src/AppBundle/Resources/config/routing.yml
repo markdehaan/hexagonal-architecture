@@ -1,0 +1,8 @@
+user_list:
+    path: /user
+    defaults: { _controller: AppBundle:User:list }
+    methods: get
+
+user_create:
+    path: /user/create
+    defaults: { _controller: AppBundle:User:create }

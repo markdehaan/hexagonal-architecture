@@ -1,0 +1,16 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <h2>Alle gebruikers</h2>
+    <a href="{{ path('user_create') }}">registreren</a>
+    <table>
+        <tr><th>Naam</th><th>Email</th></tr>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% endblock %}
+
