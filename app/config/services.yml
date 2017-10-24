@@ -35,7 +35,8 @@ services:
     #         $someArgument: 'some_value'
     app.handler.register_user:
         class: AppBundle\CommandBus\RegisterUserHandler
+        public: true
         arguments: ['@doctrine.orm.entity_manager', '@mailer']
         tags:
-            { name: 'command_bus', handles: 'AppBundle\CommandBus\RegisterUser' }
+            - { name: 'command_handler', handles: 'AppBundle\CommandBus\RegisterUser' }
 
