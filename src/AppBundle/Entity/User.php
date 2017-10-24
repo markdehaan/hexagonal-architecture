@@ -35,6 +35,15 @@ class User
      */
     private $email;
 
+    public static function register(string $name, string $email)
+    {
+        $user = new static();
+        $user->setName($name);
+        $user->setEmail($email);
+
+        return $user;
+    }
+
     /**
      * Get id
      *

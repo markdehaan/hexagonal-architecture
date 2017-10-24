@@ -31,5 +31,11 @@ services:
 
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
-    #     arguments:
+    #     arguments
     #         $someArgument: 'some_value'
+    app.handler.register_user:
+        class: AppBundle\CommandBus\RegisterUserHandler
+        arguments: ['@doctrine.orm.entity_manager', '@mailer']
+        tags:
+            { name: 'command_bus', handles: 'AppBundle\CommandBus\RegisterUser' }
+

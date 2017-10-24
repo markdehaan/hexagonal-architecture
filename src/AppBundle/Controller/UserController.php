@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Form\RegisterUserType;
 use AppBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,12 +19,13 @@ class UserController extends Controller
 
     public function createAction(Request $request)
     {
-        $form = $this->createForm(UserType::class);
+        $form = $this->createForm(RegisterUserType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            /** @var User $user */
-            $user = $form->getData();
+            $command = $form->getData();
+            $this->get('command_bus')->handle($command);
+            /*
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($user);
             $manager->flush();
@@ -35,6 +37,7 @@ class UserController extends Controller
             $this->get('mailer')->send($message);
 
             return $this->redirectToRoute('user_list');
+            */
         }
 
         return $this->render('AppBundle:User:create.html.twig', ['form' => $form->createView()]);
